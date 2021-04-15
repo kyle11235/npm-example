@@ -1,0 +1,8 @@
+version: 1
+type: npm
+resolver:
+  repo: npm
+  serverId: art1
+deployer:
+  repo: npm-local
+  serverId: art1
