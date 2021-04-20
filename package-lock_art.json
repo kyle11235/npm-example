@@ -1,0 +1,13 @@
+{
+  "name": "npm-example",
+  "version": "0.0.3",
+  "lockfileVersion": 1,
+  "requires": true,
+  "dependencies": {
+    "d3-selection": {
+      "version": "1.4.0",
+      "resolved": "http://182.92.214.141:8082/artifactory/api/npm/npm/d3-selection/download/d3-selection-1.4.0.tgz",
+      "integrity": "sha1-q5rB5mTPln6/G0ecwH4ozpkIxHQ="
+    }
+  }
+}
