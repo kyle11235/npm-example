@@ -1,4 +1,138 @@
 # NPM Example
+
+- repo 
+        
+        - structure
+
+                - taobao remote
+                https://registry.npm.taobao.org/
+                        
+                .npm
+                .npm/npm-example
+                .npm/npm-example/package.json  （include all versions, e.g. below two）
+                .npm/npm-example/npm-example-0.0.3.json  
+                .npm/npm-example/npm-example-0.0.4.json （include download url）
+                        http://182.92.214.141:8081/api/npm/npm-local/npm-example/-/npm-example-0.0.4.tgz (ali is not - , but called download)
+
+                npm-example
+                npm-example/-
+                npm-example/-/npm-example-0.0.3.tgz
+                npm-example/-/npm-example-0.0.4.tgz
+
+                npm-example/download
+                npm-example/download/npm-example-0.0.0.tgz
+                npm-example/download/npm-example-0.0.1.tgz
+
+        - metadata API
+
+                - art
+                http://182.92.214.141:8081/artifactory/api/npm/npm/npm-example
+                (this virtual includes local & remote pkg)
+
+                http://182.92.214.141:8081/artifactory/api/npm/npm/npm-example/0.0.4
+                http://182.92.214.141:8081/artifactory/api/npm/npm/npm-example/0.0.1
+
+                - npmjs.com
+                https://registry.npmjs.com/npm-example
+                https://registry.npmjs.com/npm-example/0.0.1
+
+                - alibaba
+                https://registry.npm.taobao.org/npm-example
+                https://registry.npm.taobao.org/npm-example/0.0.1
+
+- local build
+
+        - guide
+        
+                https://www.kdocs.cn/l/shqQB0HKf?f=501
+
+        - install
+                        
+                install nodejs & npm
+                wget https://npm.taobao.org/mirrors/node/v14.15.4/node-v14.15.4-linux-x64.tar.xz
+                xz xxx.xz
+                tar -xvf xxx.gz
+                set node path in /etc/profile
+
+        - config
+
+                - npm
+                        
+                        npm config set registry https://registry.npmjs.org/
+                        npm config set registry https://registry.npm.taobao.org
+                        npm config set registry http://182.92.214.141:8081/artifactory/api/npm/npm/
+                        npm config set always-auth true
+                        npm login
+                        kyle/password
+
+                                - error
+                                401
+
+                                - fix
+                                vi .npmrc
+                                always-auth=true
+                                
+                                e.g.
+                                //182.92.214.141:8081/artifactory/api/npm/npm/:_authToken.....
+                                //182.92.214.141:8081/artifactory/api/npm/npm/:always-auth=true
+
+                - yarn
+                
+                        yarn config set registry http://182.92.214.141:8081/artifactory/api/npm/npm/
+                        yarn login
+
+        - test
+        
+                - install
+                
+                        cd npm-example
+                        npm install
+
+                - publish
+                
+                        cd  node_modules/ms
+                        npm publish --registry http://182.92.214.141:8081/artifactory/api/npm/npm/
+                        (ending npm is a virtual repo)
+
+                - install version
+
+                        npm cache clean --force
+                        npm install accepts@1.3.7
+
+                - install version by yarn 
+
+                        yarn cache clean
+                        yarn add accepts@1.3.7
+
+- xray npm
+
+        must be a virtual repo
+        npm config set registry http://182.92.214.141:8081/artifactory/api/npm/npm/
+        npm login
+        cd /Users/kyle/workspace/npm-example
+        npm audit
+
+        e.g.
+        found 0 vulnerabilities
+        in 19 scanned packages
+                
+
+- npm pipeline
+
+        - guide
+        
+                https://www.kdocs.cn/l/sUfn8115n?f=501
+
+        - install
+        
+                install nodejs plugin
+                node directory = /usr/local/bin
+
+        - test
+        
+                npm.groovy
+
+
 ## Overview
 Artifactory provides full support for managing npm packages and ensures optimal and reliable access to npmjs.org. It also allows aggregating multiple npm registries under a virtual repository Artifactory, which provides access to all your npm packages through a single URL for both upload and download.
 
